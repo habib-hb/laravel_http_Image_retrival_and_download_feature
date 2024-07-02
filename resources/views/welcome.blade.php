@@ -14,13 +14,13 @@
 
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50" style="background-color: rgb(17, 24, 39); color: rgb(209, 213, 219);">
-            <h1>This is where I will show all the api data :)</h1>
-            @if(isset($data['name']))
-            <p>User Name: {{ $data['name'] }}</p>
-        @elseif(isset($data['error']))
-            <p>Error: {{ $data['error'] }}</p>
-        @else
-            <p>No data available.</p>
-        @endif
+            <h1>This is where I will show the Image :)</h1>
+
+            {{-- Showing the image file --}}
+            <img src="data:image/png;base64,{{ $base64_image }}" width="400px" alt="">
+
+            {{-- Download for the image file --}}
+            <a href="data:image/png;base64,{{ $base64_image }}" download="downloaded_file_from_far_away_haha.png">Download</a>
+
     </body>
 </html>

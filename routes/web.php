@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
 
@@ -10,13 +11,21 @@ Route::get('/', function () {
 
     // Check if the request was successful
     if ($response->successful()) {
+
         // Decode the JSON response into an array
-        $data = $response->json();
+        $data = $response->body();
+
+        $base64_image = base64_encode($data);
+
+        Session::put('base64_image' , $base64_image);
+
     } else {
         // Handle the error response
         $data = ['error' => 'Failed to retrieve data'];
+
+        $base64_image = null;
     }
 
     // Pass the data to the view
-    return view('welcome', ['data' => $data]);
+    return view('welcome', ['base64_image' => $base64_image]);
 });
